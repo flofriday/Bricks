@@ -1,6 +1,7 @@
 import style
 
 # Define a couple of values
+# TODO: Please change them to your needs
 imWidth = 800  # Width of the image
 imHeight = 600  # Height of the image
 imPadding = imWidth / 32  # Padding on the side of the image
@@ -13,19 +14,22 @@ blockOffset = blockSize / 5  # How much randomness the blocks have
 strokeSize = blockSize / 6  # Size of the border
 
 # TODO: select a style. Look into style.py to see what styles are available
-s = style.Nord
+s = style.Solarized
 
 # Setup the program
 def setup():
     size(imWidth, imHeight)
     strokeWeight(strokeSize)
     noLoop()
+    print("Current Style: " + s.name)
     print("Press ENTER to save the image.")
 
 
 # Create the blocks
 def draw():
     background(s.background)
+    
+    # Keep track of which cells are already filled
     cells = [[False for x in range(blockNumber)] for y in range(blockNumber)]
 
     for row in range(rowNumber):
@@ -69,6 +73,7 @@ def draw():
     # Fill the gaps with 1x1 blocks
     for row in range(rowNumber):
         for col in range(blockNumber):
+            # Ignore cells that are already filled
             if cells[row][col] == True:
                 continue
             y = row * cellSize + padding + imPadding
@@ -117,18 +122,24 @@ def randomPoint(x, y):
 def randomColor():
     return unhex(s.alpha + s.colors[int(random(len(s.colors)))])
 
-
+# Listen for key, presses
 def keyPressed():
+    # Save the image
     if key == ENTER or key == RETURN:
         selectOutput("Where to save the image ?", "saveFile")
+
+    # Redraw the shapes
     if key == " ":
         redraw()
+
+    # Set to a random color scheme
     if key == "n":
         global s
         s = style.randomStyle()
+        print("Change style to: " + s.name)
         redraw()
 
-
+# Save the file 
 def saveFile(selected):
     save(str(selected))
     print("Saved file at:" + str(selected))
