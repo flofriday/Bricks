@@ -1,0 +1,41 @@
+class Style:
+    def __init__(self, background, stroke, alpha, colors):
+        self.background = background
+        self.stroke = stroke
+        self.alpha = alpha
+        self.colors = colors
+
+
+Default = Style(
+    background=255,
+    stroke=0,
+    alpha=hex(70),
+    colors=["FF0000", "00FF00", "0000FF"],
+)
+
+Dracula = Style(
+    background=unhex("282a36"),
+    stroke=unhex("f8f8f2"),
+    alpha=hex(255),
+    colors=[
+        "8be9fd",
+        "50fa7b",
+        "ffb86c",
+        "ff79c6",
+        "bd93f9",
+        "ff5555",
+        "f1fa8c",
+    ],
+)
+
+Nord = Style(
+    background=unhex("d8dee9"),
+    stroke=unhex("2e3440"),
+    alpha=hex(255),
+    colors=[
+        "8fbcbb",
+        "88c0d0",
+        "81a1c1",
+        "5e81ac",
+    ],
+    )

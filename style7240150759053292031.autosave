@@ -1,0 +1,32 @@
+class Style:
+    def __init__(self, background, stroke, alpha, colors):
+        self.background = background
+        self.stroke = stroke
+        self.alpha = alpha
+        self.colors = colors
+
+NO_ALPHA = "FF"
+
+Default = Style(
+    background=255,
+    stroke=0,
+    alpha=hex(70),
+    colors=["FF0000", "00FF00", "0000FF"],
+)
+
+# Dracula Theme ispired from: https://draculatheme.com
+# Note: This looks better with no border
+Dracula = Style(
+    background=unhex("282a36"),
+    stroke=unhex(NO_ALPHA+"f8f8f2"),
+    alpha=hex(255),
+    colors=[
+        "8be9fd",
+        "50fa7b",
+        "ffb86c",
+        "ff79c6",
+        "bd93f9",
+        "ff5555",
+        "f1fa8c",
+    ],
+)
