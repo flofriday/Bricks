@@ -6,15 +6,15 @@ class Style:
         self.alpha = alpha
         self.colors = colors
 
-NO_ALPHA = "FF"
 
+NO_ALPHA = "FF"
 
 
 # Note: Use a border
 Default = Style(
     background=255,
     stroke=0,
-    disableBorder = False,
+    disableBorder=False,
     alpha=hex(70),
     colors=["FF0000", "00FF00", "0000FF"],
 )
@@ -24,17 +24,9 @@ Default = Style(
 Dracula = Style(
     background=unhex("282a36"),
     stroke=unhex("f8f8f2"),
-    disableBorder = True,
+    disableBorder=True,
     alpha=NO_ALPHA,
-    colors=[
-        "8be9fd",
-        "50fa7b",
-        "ffb86c",
-        "ff79c6",
-        "bd93f9",
-        "ff5555",
-        "f1fa8c",
-    ],
+    colors=["8be9fd", "50fa7b", "ffb86c", "ff79c6", "bd93f9", "ff5555", "f1fa8c",],
 )
 
 # Inspired by: https://www.nordtheme.com/
@@ -42,12 +34,13 @@ Dracula = Style(
 Nord = Style(
     background=unhex("eceff4"),
     stroke=unhex(NO_ALPHA + "2e3440"),
-    disableBorder = False,
+    disableBorder=False,
     alpha=NO_ALPHA,
     colors=["8fbcbb", "88c0d0", "81a1c1", "5e81ac",],
 )
 
 Styles = [Default, Dracula, Nord]
+
 
 def randomStyle():
     return Styles[int(random(len(Styles)))]

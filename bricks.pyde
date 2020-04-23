@@ -2,15 +2,15 @@ import style
 
 # Define a couple of values
 imWidth = 800  # Width of the image
-imHeight = 600 # Height of the image
-imPadding = imWidth / 32 # Padding on the side of the image
+imHeight = 600  # Height of the image
+imPadding = imWidth / 32  # Padding on the side of the image
 blockNumber = 28  # How many blocks in each direction
 cellSize = float(imWidth - imPadding * 2) / blockNumber  # Calculate how big a cell is
-rowNumber = int ((imHeight - imPadding * 2) / cellSize) # Calculate the number of rows
+rowNumber = int((imHeight - imPadding * 2) / cellSize)  # Calculate the number of rows
 padding = cellSize / 4  # Calculate the padding
 blockSize = cellSize - 2 * padding  # Calculate the block
 blockOffset = blockSize / 5  # How much randomness the blocks have
-strokeSize = blockSize / 6 # Size of the border
+strokeSize = blockSize / 6  # Size of the border
 
 # TODO: select a style. Look into style.py to see what styles are available
 s = style.Nord
@@ -42,14 +42,11 @@ def draw():
                     y = i * cellSize + padding + imPadding
                     x = j * cellSize + padding + imPadding
                     drawBlock(
-                        x,
-                        y,
-                        blockSize * 2 + 2 * padding,
-                        blockSize * 2 + 2 * padding,
+                        x, y, blockSize * 2 + 2 * padding, blockSize * 2 + 2 * padding,
                     )
-                    cells[i][j] = cells[i + 1][j] = cells[i][j + 1] = cells[
-                        i + 1
-                    ][j + 1] = True
+                    cells[i][j] = cells[i + 1][j] = cells[i][j + 1] = cells[i + 1][
+                        j + 1
+                    ] = True
 
             # Draw the 2x1 blocks
             if random(1) < 0.3:
@@ -90,7 +87,7 @@ def drawBlock(x, y, w, h):
     vertex(randomPoint(x + w, y + h))
     vertex(randomPoint(x, y + h))
     endShape(CLOSE)
-    
+
     # Draw the border
     if not s.disableBorder:
         strokeJoin(ROUND)
@@ -120,18 +117,18 @@ def randomPoint(x, y):
 def randomColor():
     return unhex(s.alpha + s.colors[int(random(len(s.colors)))])
 
+
 def keyPressed():
     if key == ENTER or key == RETURN:
         selectOutput("Where to save the image ?", "saveFile")
     if key == " ":
         redraw()
     if key == "n":
-        global s 
+        global s
         s = style.randomStyle()
         redraw()
-        
-    
+
+
 def saveFile(selected):
     save(str(selected))
     print("Saved file at:" + str(selected))
-    
