@@ -2,7 +2,7 @@ import style
 
 # Define a couple of values
 imWidth = 800  # Width of the image
-imHeight = 700 # Height of the image
+imHeight = 600 # Height of the image
 imPadding = imWidth / 32 # Padding on the side of the image
 blockNumber = 28  # How many blocks in each direction
 cellSize = float(imWidth - imPadding * 2) / blockNumber  # Calculate how big a cell is
@@ -11,7 +11,6 @@ padding = cellSize / 4  # Calculate the padding
 blockSize = cellSize - 2 * padding  # Calculate the block
 blockOffset = blockSize / 5  # How much randomness the blocks have
 strokeSize = blockSize / 6 # Size of the border
-disableBorder = False # If you want to disable the borders all together
 
 # TODO: select a style. Look into style.py to see what styles are available
 s = style.Nord
@@ -21,6 +20,7 @@ def setup():
     size(imWidth, imHeight)
     strokeWeight(strokeSize)
     noLoop()
+    print("Press ENTER to save the image.")
 
 
 # Create the blocks
@@ -92,7 +92,7 @@ def drawBlock(x, y, w, h):
     endShape(CLOSE)
     
     # Draw the border
-    if not disableBorder:
+    if not s.disableBorder:
         strokeJoin(ROUND)
         stroke(s.stroke)
         noFill()
@@ -119,3 +119,19 @@ def randomPoint(x, y):
 # Return a random color
 def randomColor():
     return unhex(s.alpha + s.colors[int(random(len(s.colors)))])
+
+def keyPressed():
+    if key == ENTER or key == RETURN:
+        selectOutput("Where to save the image ?", "saveFile")
+    if key == " ":
+        redraw()
+    if key == "n":
+        global s 
+        s = style.randomStyle()
+        redraw()
+        
+    
+def saveFile(selected):
+    save(str(selected))
+    print("Saved file at:" + str(selected))
+    
