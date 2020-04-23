@@ -10,4 +10,4 @@ You need [Processing 3](https://processing.org/download/) with the python plugin
 * N: New image with new random color scheme
 
 
-Creating new color schemes is pretty straigth forward, all of them are defined in styles.py.
+At the moment there are 5 color schemes, but creating new one is pretty easy. All schemes are defined in styles.py.
