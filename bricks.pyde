@@ -4,17 +4,18 @@ import style
 # TODO: Please change them to your needs
 imWidth = 800  # Width of the image
 imHeight = 600  # Height of the image
-imPadding = imWidth / 32  # Padding on the side of the image
+imPaddingWidth = imWidth / 30  # Padding on the left and rigth side of the image
 blockNumber = 28  # How many blocks in each direction
-cellSize = float(imWidth - imPadding * 2) / blockNumber  # Calculate how big a cell is
-rowNumber = int((imHeight - imPadding * 2) / cellSize)  # Calculate the number of rows
+cellSize = float(imWidth - imPaddingWidth * 2) / blockNumber  # Calculate how big a cell is
+rowNumber = int((imHeight - imPaddingWidth * 2) / cellSize)  # Calculate the number of rows
+imPaddingHeight = (imHeight - cellSize * rowNumber) / 2.0 # Calculate the top and bottom padding
 padding = cellSize / 4  # Calculate the padding
-blockSize = cellSize - 2 * padding  # Calculate the block
+blockSize = cellSize - 2 * padding  # Calculate the blocksize
 blockOffset = blockSize / 5  # How much randomness the blocks have
 strokeSize = blockSize / 6  # Size of the border
 
 # TODO: select a style. Look into style.py to see what styles are available
-s = style.Solarized
+s = style.One
 
 # Setup the program
 def setup():
@@ -43,8 +44,8 @@ def draw():
                     and not cells[i][j + 1]
                     and not cells[i + 1][j + 1]
                 ):
-                    y = i * cellSize + padding + imPadding
-                    x = j * cellSize + padding + imPadding
+                    y = i * cellSize + padding + imPaddingHeight
+                    x = j * cellSize + padding + imPaddingWidth
                     drawBlock(
                         x, y, blockSize * 2 + 2 * padding, blockSize * 2 + 2 * padding,
                     )
@@ -56,8 +57,8 @@ def draw():
             if random(1) < 0.3:
                 i, j = randomCell(rowNumber, blockNumber - 1)
                 if not cells[i][j] and not cells[i][j + 1]:
-                    y = i * cellSize + padding + imPadding
-                    x = j * cellSize + padding + imPadding
+                    y = i * cellSize + padding + imPaddingHeight
+                    x = j * cellSize + padding + imPaddingWidth
                     drawBlock(x, y, blockSize * 2 + 2 * padding, blockSize)
                     cells[i][j] = cells[i][j + 1] = True
 
@@ -65,8 +66,8 @@ def draw():
             if random(1) < 0.3:
                 i, j = randomCell(rowNumber - 1, blockNumber)
                 if not cells[i][j] and not cells[i + 1][j]:
-                    y = i * cellSize + padding + imPadding
-                    x = j * cellSize + padding + imPadding
+                    y = i * cellSize + padding + imPaddingHeight
+                    x = j * cellSize + padding + imPaddingWidth
                     drawBlock(x, y, blockSize, blockSize * 2 + 2 * padding)
                     cells[i][j] = cells[i + 1][j] = True
 
@@ -76,8 +77,8 @@ def draw():
             # Ignore cells that are already filled
             if cells[row][col] == True:
                 continue
-            y = row * cellSize + padding + imPadding
-            x = col * cellSize + padding + imPadding
+            y = row * cellSize + padding + imPaddingHeight
+            x = col * cellSize + padding + imPaddingWidth
             drawBlock(x, y, blockSize, blockSize)
 
 
